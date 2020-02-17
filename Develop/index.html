@@ -28,11 +28,65 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
+    <div id="containerBlock" class="container">
       <!-- Timeblocks go here -->
-    </div>
+      <table id="tableBlock">
+        <thead>
+          <tr class="row">
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
 
+        </tbody>
+      </table>
+    </div>
+    
+      <!--I think the goal is for us to not use an external .js page, but focus on using minified jQuery to make this entirely self-contained? Will clarify, but move forward on that assumption-->
+
+      <!--Inclusion of moment to reference time, and other script libraries-->
+
+    
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <!--Short bit of jScript/jQuery, will move to external page if it gets excessive.-->
+    <script>
+      moment().format();
+      var now = moment();
+      //REMINDER. In order to simplify table rows below, I may change the blockOrder Array to string values. 
+      var blockOrder = [9,10,11,12,1,2,3,4,5]
+      var timeBlockRow;
+
+      document.getElementById("currentDay").innerHTML = now;
+
+      for (var i=0; i < blockOrder.length; i++) {
+        var timeBlockRow = document.createElement("tr");
+        timeBlockRow.className = "row";
+        document.getElementById("tableBlock").append(timeBlockRow);
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        timeBlockRow.append(td1);
+        timeBlockRow.append(td2);
+        timeBlockRow.append(td3);
+       //Apart from the if else statement this is all working. Will tweak further.
+        if (i == 0||1||2) {
+        console.log(typeof i);
+        td1.textContent = (blockOrder[i]+ " AM");
+      }
+      else {
+        td1.textContent = (blockOrder[i]+ " PM");
+      }
+
+        var brIn = document.createElement("br");
+        document.getElementById("tableBlock").append(brIn);
+
+
+      }
+    </script>
   </body>
 </html>
