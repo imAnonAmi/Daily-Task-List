@@ -30,12 +30,12 @@
     </header>
     <div id="containerBlock" class="container">
       <!-- Timeblocks go here -->
-      <table id="tableBlock">
+      <table id="tableBlock" class="table" style="position: relative; width: 100%;">
         <thead>
-          <tr class="row">
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+          <tr class="row" style="width: 100%;">
+            <th scope="col" style="width: 15%;">Time of Day</th>
+            <th scope="col" style="width: 70%;">Activities, tasks, to-dos</th>
+            <th scope="col" style="width: 15%;">Save for tomorrow</th>
             </tr>
         </thead>
         <tbody>
@@ -54,34 +54,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <!--Short bit of jScript/jQuery, will move to external page if it gets excessive.-->
-    <script>
+    <script type="text/javascript">
       moment().format();
       var now = moment();
       //REMINDER. In order to simplify table rows below, I may change the blockOrder Array to string values. 
       var blockOrder = [9,10,11,12,1,2,3,4,5]
       var timeBlockRow;
+      var ele;
 
       document.getElementById("currentDay").innerHTML = now;
 
       for (var i=0; i < blockOrder.length; i++) {
         var timeBlockRow = document.createElement("tr");
-        timeBlockRow.className = "row";
+        timeBlockRow.className="row";
         document.getElementById("tableBlock").append(timeBlockRow);
         var td1 = document.createElement("td");
         var td2 = document.createElement("td");
         var td3 = document.createElement("td");
+      //Setting td1 (hour) attributes 
+        td1.setAttribute("class", "hour");
+        td1.setAttribute("width", "15%");
+      //Setting td2 (time-block) attributes
+        td2.setAttribute("class", "present");
+        td2.setAttribute("id", "timeArea"+ i);
+        console.log(td2);
+        td2.setAttribute("width", "70%");
+      //Here I am creating a textInput, with unique ID for each div. It works, but looks ugly. For now it will do.
+        var ele = document.createElement("input");
+        ele.setAttribute("type", "text");
+        ele.setAttribute("id", "textInput"+ i);
+        ele.setAttribute("width", "90%");
+        ele.setAttribute("height", "90%");
+        ele.setAttribute("border", "0px");
+        td2.appendChild(ele);
+      //Setting td3 (saveBtn) attributes
+        td3.setAttribute("class", "saveBtn");
+        td3.setAttribute("width", "15%");
+        
         timeBlockRow.append(td1);
         timeBlockRow.append(td2);
         timeBlockRow.append(td3);
        //Apart from the if else statement this is all working. Will tweak further.
-        if (i == 0||1||2) {
-        console.log(typeof i);
+      
         td1.textContent = (blockOrder[i]+ " AM");
-      }
-      else {
-        td1.textContent = (blockOrder[i]+ " PM");
-      }
-
+     
         var brIn = document.createElement("br");
         document.getElementById("tableBlock").append(brIn);
 
