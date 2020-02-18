@@ -55,7 +55,7 @@
       moment().format();
       var now = moment().format('lll');
       //REMINDER. In order to simplify table rows below, I may change the blockOrder Array to string values. 
-      var blockOrder = ["0900","1000","1100","1200","1300","1400","1500","1600","1700"]
+      var blockOrder = [9,10,11,12,13,14,15,16,17]
       var timeBlockRow;
       var ele;
    
@@ -72,11 +72,23 @@
         td1.setAttribute("class", "hour");
         td1.setAttribute("width", "15%");
       //Proper moment formatting for calling time from array. Remember to reference this in td2 for setting class (i.e. past, present, future)
-        td1.textContent = (moment(blockOrder[i],"h:mm a").format("h:mm a"));
+        var timePlace = (moment(blockOrder[i],"h:mm a").format("h:mm a"));
+        var currentHour = moment().hours();
+        console.log(timePlace);
+        console.log(currentHour);
+        console.log(typeof(currentHour));
+        td1.textContent = timePlace;
       //Setting td2 (time-block) attributes
+      if (currentHour < (blockOrder[i])) {
+        td2.setAttribute("class", "future");
+      }
+      if (currentHour == blockOrder[i]) {
         td2.setAttribute("class", "present");
-        td2.setAttribute("id", "timeArea"+ i);
-               
+      }
+      if (currentHour > blockOrder[i]) {
+        td2.setAttribute("class", "past");
+      }
+        td2.setAttribute("id", "timeArea"+ i);    
         td2.setAttribute("width", "70%");
       //Here I am creating a textInput, with unique ID for each div. It works, but looks ugly. For now it will do.
         var ele = document.createElement("textarea");
