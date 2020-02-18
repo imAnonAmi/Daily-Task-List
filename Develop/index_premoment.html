@@ -55,14 +55,13 @@
 
     <!--Short bit of jScript/jQuery, will move to external page if it gets excessive.-->
     <script type="text/javascript">
-    
       moment().format();
-      var now = moment().format('lll');
+      var now = moment();
       //REMINDER. In order to simplify table rows below, I may change the blockOrder Array to string values. 
-      var blockOrder = ["0900","1000","1100","1200","1300","1400","1500","1600","1700"]
+      var blockOrder = [9,10,11,12,1,2,3,4,5]
       var timeBlockRow;
       var ele;
-   
+
       document.getElementById("currentDay").innerHTML = now;
 
       for (var i=0; i < blockOrder.length; i++) {
@@ -94,14 +93,12 @@
         timeBlockRow.append(td2);
         timeBlockRow.append(td3);
        //Apart from the if else statement this is all working. Will tweak further.
-        
       
-        td1.textContent = (moment(blockOrder[i],'hhmm'));
-        
+        td1.textContent = (blockOrder[i]+ " AM");
      
         var brIn = document.createElement("br");
         document.getElementById("tableBlock").append(brIn);
-      
+
 
       }
     </script>
