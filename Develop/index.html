@@ -32,11 +32,7 @@
       <!-- Timeblocks go here -->
       <table id="tableBlock" class="table" style="position: relative; width: 100%;">
         <thead>
-          <tr class="row" style="width: 100%;">
-            <th scope="col" style="width: 15%;">Time of Day</th>
-            <th scope="col" style="width: 70%;">Activities, tasks, to-dos</th>
-            <th scope="col" style="width: 15%;">Save for tomorrow</th>
-            </tr>
+
         </thead>
         <tbody>
 
@@ -75,33 +71,39 @@
       //Setting td1 (hour) attributes 
         td1.setAttribute("class", "hour");
         td1.setAttribute("width", "15%");
+      //Proper moment formatting for calling time from array. Remember to reference this in td2 for setting class (i.e. past, present, future)
+        td1.textContent = (moment(blockOrder[i],"h:mm a").format("h:mm a"));
       //Setting td2 (time-block) attributes
         td2.setAttribute("class", "present");
         td2.setAttribute("id", "timeArea"+ i);
-        console.log(td2);
+               
         td2.setAttribute("width", "70%");
       //Here I am creating a textInput, with unique ID for each div. It works, but looks ugly. For now it will do.
         var ele = document.createElement("textarea");
         ele.setAttribute("class", "textarea");
         ele.setAttribute("id", "textBox"+ i);
+        ele.setAttribute("value", i);
         ele.cols=90;
         td2.appendChild(ele);
+        console.log(td2);
       //Setting td3 (saveBtn) attributes
         td3.setAttribute("class", "saveBtn");
+        td3.setAttribute("id", "saveIt"+i);
+        td3.setAttribute("value", i);
         td3.setAttribute("width", "15%");
+        console.log(td3);
         
         timeBlockRow.append(td1);
         timeBlockRow.append(td2);
         timeBlockRow.append(td3);
        //Apart from the if else statement this is all working. Will tweak further.
         
-      
-        td1.textContent = (moment(blockOrder[i],'hhmm'));
+        
+        
         
      
         var brIn = document.createElement("br");
-        document.getElementById("tableBlock").append(brIn);
-      
+            
 
       }
     </script>
