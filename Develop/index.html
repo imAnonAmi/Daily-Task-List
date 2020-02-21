@@ -51,7 +51,7 @@
 
     <!--Short bit of jScript/jQuery, will move to external page if it gets excessive.-->
     <script type="text/javascript">
-    
+    $(document).ready(function(){
       moment().format();
       var now = moment().format('lll');
       //REMINDER. In order to simplify table rows below, I may change the blockOrder Array to string values. 
@@ -97,15 +97,20 @@
         ele.setAttribute("id", "textBox"+ i);
         ele.setAttribute("value", i);
         ele.cols=90;
-        // Local Storage part where I check if there is a value already
-        if (localStorage.getItem(i) !== null) {
-          noteIn = localStorage.getItem(i);
-          console.log(noteIn);
-          $("textarea"+ i).text(noteIn);
-    
-        }
         td2.appendChild(ele);
         console.log(td2);
+        // Local Storage part where I check if there is a value already
+        if (localStorage.getItem('note'+i) !== null) {
+          var noteIn = window.localStorage.getItem('note'+i);
+          console.log(i);
+          console.log(noteIn);
+
+          //The below is where this is breaking. Maybe ele.id=noteIn if ele.value does not?
+          ele.value=noteIn;
+          
+    
+        }
+       
       //Setting td3 (saveBtn) attributes
         td3.setAttribute("type", "button");
         td3.setAttribute("class", "saveBtn");
@@ -124,33 +129,18 @@
 
     //Local Storage part where I set the Local Storage value, probably
 
-    // not working as an array. might return to faulty functionality i had before
     
-      $(document).ready(function(){
-    
-        $(".saveBtn").on("click", saveNote);
-        var btnVal = $(".saveBtn").attr('value');
-        var textCatch=("textarea"+btnVal).text;
-        console.log(btnVal);
-        console.log(textCatch);
-if (localStorage.getItem("noteResult")) {
-    noteArray = JSON.parse(localStorage.getItem("noteResult"));
-}
-else {
-    noteArray = [];
-}
-function saveNote(event) {
-    event.preventDefault();
+    var saveNote = "";
 
-    var noteData = {
-        slot: btnVal,
-        note: $("textArea"+btnVal).value
-    }
-    console.log(noteData);
-    noteArray.push(noteData);
-    window.localStorage.setItem("noteResult", JSON.stringify(noteArray));
+      
+      $('.saveBtn').on('click', function(){
+      var saveVal = $(this).attr("value");
+      var saveNote = document.getElementById("textBox"+saveVal).value;
+      console.log(saveNote);
+      window.localStorage.setItem('note'+saveVal, saveNote);
+
+    })
     
-}
 
       });
     </script>
