@@ -58,8 +58,6 @@
       var blockOrder = [9,10,11,12,13,14,15,16,17]
       var timeBlockRow;
       var ele;
-      var noteHold;
-      var noteIn;
    
       document.getElementById("currentDay").innerHTML = now;
 
@@ -78,6 +76,7 @@
         var currentHour = moment().hours();
         console.log(timePlace);
         console.log(currentHour);
+        console.log(typeof(currentHour));
         td1.textContent = timePlace;
       //Setting td2 (time-block) attributes
       if (currentHour < (blockOrder[i])) {
@@ -92,22 +91,14 @@
         td2.setAttribute("id", "timeArea"+ i);    
         td2.setAttribute("width", "70%");
       //Here I am creating a textInput, with unique ID for each div. It works, but looks ugly. For now it will do.
-      var ele = document.createElement("textarea");
-        ele.setAttribute("class", "textarea"+i);
+        var ele = document.createElement("textarea");
+        ele.setAttribute("class", "textarea");
         ele.setAttribute("id", "textBox"+ i);
         ele.setAttribute("value", i);
         ele.cols=90;
-        // Local Storage part where I check if there is a value already
-        if (localStorage.getItem(i) !== null) {
-          noteIn = localStorage.getItem(i);
-          console.log(noteIn);
-          $("textarea"+ i).text(noteIn);
-    
-        }
         td2.appendChild(ele);
         console.log(td2);
       //Setting td3 (saveBtn) attributes
-        td3.setAttribute("type", "button");
         td3.setAttribute("class", "saveBtn");
         td3.setAttribute("id", "saveIt"+i);
         td3.setAttribute("value", i);
@@ -118,41 +109,15 @@
         timeBlockRow.append(td2);
         timeBlockRow.append(td3);
        //Apart from the if else statement this is all working. Will tweak further.
-   var brIn = document.createElement("br");
- 
+        
+        
+        
+        
+     
+        var brIn = document.createElement("br");
+            
+
       }
-
-    //Local Storage part where I set the Local Storage value, probably
-
-    // not working as an array. might return to faulty functionality i had before
-    
-      $(document).ready(function(){
-    
-        $(".saveBtn").on("click", saveNote);
-        var btnVal = $(".saveBtn").attr('value');
-        var textCatch=("textarea"+btnVal).text;
-        console.log(btnVal);
-        console.log(textCatch);
-if (localStorage.getItem("noteResult")) {
-    noteArray = JSON.parse(localStorage.getItem("noteResult"));
-}
-else {
-    noteArray = [];
-}
-function saveNote(event) {
-    event.preventDefault();
-
-    var noteData = {
-        slot: btnVal,
-        note: $("textArea"+btnVal).value
-    }
-    console.log(noteData);
-    noteArray.push(noteData);
-    window.localStorage.setItem("noteResult", JSON.stringify(noteArray));
-    
-}
-
-      });
     </script>
   </body>
 </html>
