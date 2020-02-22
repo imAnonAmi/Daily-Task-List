@@ -54,6 +54,9 @@ $(document).ready(function(){
       td3.setAttribute("id", "saveIt"+i);
       td3.setAttribute("value", i);
       td3.setAttribute("width", "15%");
+      var discDiv= document.createElement("div");
+      discDiv.setAttribute("class", "fas fa-save");
+      td3.append(discDiv);
 //Append tds to row  
       timeBlockRow.append(td1);
       timeBlockRow.append(td2);
