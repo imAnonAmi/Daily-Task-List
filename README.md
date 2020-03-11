@@ -3,7 +3,7 @@
 ### Deployed at
 https://imanonami.github.io/Homework_05/
 
-## Purpose
+## Project Description
 This app tracks tasks across a standard work day using moment.js. Time slots in the past, present, and future (relative to when user views the calendar), are styled dynamically by comparing times using moment.js and then assigning classes (tied to the style.css) accordingly. Clicking on the central area will allow users to enter notes for that hour's specific tasks. Clicking on the blue Save button to the right saves data to local storage. Saved data is retrieved and displayed on page load for blocks that have saved text.
 
 ## Files
